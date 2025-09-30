@@ -6,14 +6,13 @@ const Header = () => {
   const location = useLocation();
   const addActive = ({ isActive }) => (isActive ? styles.active : styles.link);
 
-  // Приховуємо Header на сторінці результату
   if (location.pathname === "/result") {
     return <Outlet />;
   }
 
   return (
     <>
-      <header className={styles.header}>
+      <header className="w-16 md:w-32 xl:w-48 bg-orange-400">
         <div className={styles.wrapper}>
           <nav>
             <ul className={styles.nav}>

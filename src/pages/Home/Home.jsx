@@ -10,7 +10,9 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1>Welcom to our quiz!</h1>
+      <h1 className="text-xl font-medium text-blue-500">
+        Welcome to our quiz!
+      </h1>
       <p>Follow a few steps to get a personalized result.</p>
 
       <Formik
