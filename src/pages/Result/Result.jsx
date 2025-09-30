@@ -14,17 +14,17 @@ const Result = () => {
   const handleRestart = () => {
     dispatch(resetQuiz());
     dispatch(clearUserName());
-    navigate("/");
+    navigate("/quiz");
   };
 
   return (
     <div className="result-page">
-      <h1>Результати</h1>
-      {userName && <h2>Дякуємо, {userName}!</h2>}
+      <h1>Results</h1>
+      {userName && <h2>Thanks, {userName}!</h2>}
 
       <QuizResult />
 
-      <button onClick={handleRestart}>Пройти ще раз</button>
+      <button onClick={handleRestart}>Take the test again</button>
     </div>
   );
 };

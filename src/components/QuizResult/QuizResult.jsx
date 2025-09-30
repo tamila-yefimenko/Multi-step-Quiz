@@ -11,7 +11,7 @@ function QuizResult() {
   const isLoaded = useSelector(selectIsLoaded);
 
   if (!isLoaded) {
-    return <p>Завантаження результатів...</p>;
+    return <p>Loadind your results...</p>;
   }
 
   const correctCount = steps.reduce((sum, step) => {
@@ -35,16 +35,16 @@ function QuizResult() {
     const userAnswer = answers.find(
       (a) => a.questionId === question.sys.id
     )?.value;
-    if (!userAnswer) return { text: "Не відповіли", color: "gray" };
+    if (!userAnswer) return { text: "No answer", color: "gray" };
     return userAnswer === question.fields.correctAnswer
-      ? { text: "✔️ Правильно", color: "green" }
-      : { text: "❌ Неправильно", color: "#c0392b" };
+      ? { text: "✔️ Correct", color: "green" }
+      : { text: "❌ Incorrect", color: "#c0392b" };
   };
 
   return (
     <div className="quiz-result">
       <h2>
-        Ваш результат: {correctCount} / {totalQuestions} (
+        Your result: {correctCount} / {totalQuestions} (
         {Math.round((correctCount / totalQuestions) * 100)}%)
       </h2>
 
@@ -60,13 +60,13 @@ function QuizResult() {
             return (
               <div key={q.sys.id} className="question-result">
                 <p>
-                  <strong>Питання:</strong> {q.fields.questionText}
+                  <strong>Question:</strong> {q.fields.questionText}
                 </p>
                 <p>
-                  <strong>Ваша відповідь:</strong> {userAnswer || "—"}
+                  <strong>Your answer:</strong> {userAnswer || "—"}
                 </p>
                 <p>
-                  <strong>Правильна відповідь:</strong> {q.fields.correctAnswer}
+                  <strong>Correct answer:</strong> {q.fields.correctAnswer}
                 </p>
                 <p style={{ color: status.color, fontWeight: "bold" }}>
                   {status.text}

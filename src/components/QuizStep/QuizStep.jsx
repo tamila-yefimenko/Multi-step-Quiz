@@ -36,14 +36,14 @@ function QuizStep() {
   }, [currentStep]);
 
   if (!isLoaded || steps.length === 0) {
-    return <p>Завантаження кроків...</p>;
+    return <p>Loading steps...</p>;
   }
 
   const step = steps[currentStep];
   const questions = step?.questions;
 
   if (!step || !questions?.length) {
-    return <p>Крок не знайдено або не має питань.</p>;
+    return <p>Step not found or has no questions.</p>;
   }
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -81,7 +81,7 @@ function QuizStep() {
   return (
     <div className="quiz-step">
       <h2>
-        Крок {currentStep + 1}: {step.title}
+        Step {currentStep + 1}: {step.title}
       </h2>
 
       <div key={questionId} className="question-block">
@@ -117,13 +117,13 @@ function QuizStep() {
         <button
           onClick={handlePreviousQuestion}
           disabled={currentStep === 0 && currentQuestionIndex === 0}>
-          Назад
+          Go back
         </button>
 
         {isLastStep && isLastQuestion ? (
-          <button onClick={() => navigate("/result")}>Завершити</button>
+          <button onClick={() => navigate("/result")}>Finish</button>
         ) : (
-          <button onClick={handleNextQuestion}>Далі</button>
+          <button onClick={handleNextQuestion}>Next</button>
         )}
       </div>
     </div>

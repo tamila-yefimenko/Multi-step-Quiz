@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -11,15 +10,13 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1>Ласкаво просимо до нашого квізу!</h1>
-      <p>Пройдіть кілька кроків, щоби отримати персоналізований результат.</p>
+      <h1>Welcom to our quiz!</h1>
+      <p>Follow a few steps to get a personalized result.</p>
 
       <Formik
         initialValues={{ name: "" }}
         validationSchema={Yup.object({
-          name: Yup.string()
-            .min(2, "Мінімум 2 символи")
-            .required("Обовʼязкове поле"),
+          name: Yup.string().min(2, "Min 2 symbols").required("Required field"),
         })}
         onSubmit={(values) => {
           dispatch(setUserName(values.name));
@@ -27,15 +24,15 @@ function Home() {
         }}>
         {({ isValid, dirty }) => (
           <Form className="name-form">
-            <label htmlFor="name">Введіть ваше ім’я:</label>
-            <Field name="name" type="text" placeholder="Ваше ім’я" />
+            <label htmlFor="name">Enter your name:</label>
+            <Field name="name" type="text" placeholder="Your name" />
             <ErrorMessage name="name" component="div" className="error" />
 
             <button
               type="submit"
               className="start-button"
               disabled={!(isValid && dirty)}>
-              Почати тест
+              Start the test
             </button>
           </Form>
         )}
