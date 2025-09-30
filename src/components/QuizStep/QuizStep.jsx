@@ -12,9 +12,11 @@ import {
   previousStep,
 } from "../../redux/quiz/quizSlice";
 import { fetchSteps } from "../../redux/quiz/operations";
+import { useNavigate } from "react-router-dom";
 
 function QuizStep() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const currentStep = useSelector(selectCurrentStep);
   const steps = useSelector(selectSteps);
@@ -119,9 +121,7 @@ function QuizStep() {
         </button>
 
         {isLastStep && isLastQuestion ? (
-          <button onClick={() => (window.location.href = "/result")}>
-            Завершити
-          </button>
+          <button onClick={() => navigate("/result")}>Завершити</button>
         ) : (
           <button onClick={handleNextQuestion}>Далі</button>
         )}

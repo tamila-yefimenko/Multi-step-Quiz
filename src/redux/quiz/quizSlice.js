@@ -28,7 +28,13 @@ const quizSlice = createSlice({
         state.answers.push({ questionId, value });
       }
     },
-    resetQuiz: () => initialState,
+    resetQuiz: (state) => {
+      state.currentStep = 0;
+      state.steps = [];
+      state.answers = [];
+      state.isLoaded = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder

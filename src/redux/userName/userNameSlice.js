@@ -9,7 +9,7 @@ const userNameSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    clearUserName: (state) => (state.userName = ""),
+    clearUserName: () => ({ userName: "" }),
   },
   extraReducers: (builder) => {
     builder.addCase(setUserName, (state, action) => {

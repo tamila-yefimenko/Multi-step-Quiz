@@ -1,10 +1,16 @@
 import { Suspense } from "react";
-import { Outlet, NavLink } from "react-router-dom";
-
+import { Outlet, NavLink, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = () => {
+  const location = useLocation();
   const addActive = ({ isActive }) => (isActive ? styles.active : styles.link);
+
+  // Приховуємо Header на сторінці результату
+  if (location.pathname === "/result") {
+    return <Outlet />;
+  }
+
   return (
     <>
       <header className={styles.header}>
