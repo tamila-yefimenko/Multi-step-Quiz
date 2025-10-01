@@ -3,7 +3,7 @@ import QuizStep from "../../components/QuizStep/QuizStep";
 
 function Quiz() {
   return (
-    <div className="quiz-container">
+    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-5 min-h-[70vh] flex flex-col justify-between">
       <ProgressBar />
       <QuizStep />
     </div>

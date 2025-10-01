@@ -79,24 +79,32 @@ function QuizStep() {
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   return (
-    <div className="quiz-step">
+    <div>
       <h2>
         Step {currentStep + 1}: {step.title}
       </h2>
 
-      <div key={questionId} className="question-block">
-        <p>{questionText}</p>
+      <div key={questionId} className="space-y-4 py-5">
+        <p className="text-xl font-semibold">{questionText}</p>
 
         {(questionType === "multiple_choice" || questionType === "scale") && (
-          <div className="options">
+          <div className="flex flex-col gap-3">
             {possibleAnswers?.map((option) => (
-              <label key={option}>
+              <label
+                key={option}
+                className={`p-3 border rounded-lg cursor-pointer transition 
+            ${
+              currentAnswer === option
+                ? "bg-orange-100 border-orange-400"
+                : "hover:bg-gray-100"
+            }`}>
                 <input
                   type="radio"
                   name={questionId}
                   value={option}
                   checked={currentAnswer === option}
                   onChange={() => handleAnswer(questionId, option)}
+                  className="hidden"
                 />
                 {option}
               </label>
@@ -109,21 +117,34 @@ function QuizStep() {
             type="text"
             value={currentAnswer}
             onChange={(e) => handleAnswer(questionId, e.target.value)}
+            className="w-full p-2 border rounded-lg"
           />
         )}
       </div>
 
-      <div className="navigation-buttons">
-        <button
-          onClick={handlePreviousQuestion}
-          disabled={currentStep === 0 && currentQuestionIndex === 0}>
-          Go back
-        </button>
+      <div className="flex justify-between items-center">
+        {!(currentStep === 0 && currentQuestionIndex === 0) ? (
+          <button
+            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
+            onClick={handlePreviousQuestion}>
+            Go back
+          </button>
+        ) : (
+          <div />
+        )}
 
         {isLastStep && isLastQuestion ? (
-          <button onClick={() => navigate("/result")}>Finish</button>
+          <button
+            className="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600"
+            onClick={() => navigate("/result")}>
+            Finish
+          </button>
         ) : (
-          <button onClick={handleNextQuestion}>Next</button>
+          <button
+            className="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600"
+            onClick={handleNextQuestion}>
+            Next
+          </button>
         )}
       </div>
     </div>

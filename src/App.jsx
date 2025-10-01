@@ -11,7 +11,7 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 function App() {
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
-      <div className="container mx-auto px-4">
+      <div className="container px-4">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

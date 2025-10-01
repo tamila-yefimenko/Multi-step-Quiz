@@ -32,7 +32,7 @@ function Home() {
 
             <button
               type="submit"
-              className="start-button"
+              className="bg-orange-500 text-white rounded-xl px-6 py-3  hover:bg-orange-600"
               disabled={!(isValid && dirty)}>
               Start the test
             </button>

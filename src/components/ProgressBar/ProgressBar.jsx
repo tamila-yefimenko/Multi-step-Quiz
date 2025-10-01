@@ -15,16 +15,16 @@ function ProgressBar() {
   const progressPercent = ((currentStep + 1) / totalSteps) * 100;
 
   return (
-    <div className={styles.progressBarWrapper}>
-      <div className={styles.progressLabel}>
+    <div className="w-full">
+      <div className="flex justify-between mb-2 text-sm text-gray-600">
         Step {currentStep + 1} of {totalSteps}
       </div>
       <div className={styles.progressSubLabel}>
         Answered {answeredCount} of {totalQuestions} questions
       </div>
-      <div className={styles.progressBar}>
+      <div className="w-full bg-gray-200 rounded-full h-2">
         <div
-          className={styles.progressBarFill}
+          className="bg-orange-500 h-2 rounded-full transition-all duration-300"
           style={{ width: `${progressPercent}%` }}
         />
       </div>

@@ -11,10 +11,6 @@ export const fetchSteps = createAsyncThunk(
         const { id } = entry.sys;
         const { title, questions } = entry.fields;
 
-        // const formattedQuestions = (questions || []).map(
-        //   (q) => q.fields.text || "Питання без тексту"
-        // );
-
         return {
           id,
           title,

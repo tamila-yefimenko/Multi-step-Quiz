@@ -1,34 +1,32 @@
 import { Suspense } from "react";
-import { Outlet, NavLink, useLocation } from "react-router-dom";
-import styles from "./Header.module.css";
+import { Outlet, NavLink } from "react-router-dom";
 
 const Header = () => {
-  const location = useLocation();
-  const addActive = ({ isActive }) => (isActive ? styles.active : styles.link);
+  // const location = useLocation();
+  const addActive = ({ isActive }) =>
+    isActive ? "text-red-600 underline" : "text-white hover:text-blue-100";
 
-  if (location.pathname === "/result") {
-    return <Outlet />;
-  }
+  // if (location.pathname === "/result") {
+  //   return <Outlet />;
+  // }
 
   return (
     <>
-      <header className="w-16 md:w-32 xl:w-48 bg-orange-400">
-        <div className={styles.wrapper}>
-          <nav>
-            <ul className={styles.nav}>
-              <li>
-                <NavLink to="/" className={addActive}>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/quiz" className={addActive}>
-                  Quiz
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
+      <header className="mx-auto flex max-w-100 justify-center rounded-xl p-6 mb-10 shadow-lg outline-black/5 bg-orange-400">
+        <nav>
+          <ul className="flex gap-x-6 text-xl font-medium ">
+            <li>
+              <NavLink to="/" className={addActive}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/quiz" className={addActive}>
+                Quiz
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
       <Suspense fallback={null}>
         <Outlet />
