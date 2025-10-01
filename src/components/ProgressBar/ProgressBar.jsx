@@ -1,25 +1,34 @@
 import { useSelector } from "react-redux";
-import styles from "./ProgressBar.module.css";
 
 function ProgressBar() {
   const { currentStep, steps, answers } = useSelector((state) => state.quiz);
-
-  const totalSteps = steps.length || 1;
 
   const totalQuestions = steps.reduce((total, step) => {
     return total + (step.questions?.length || 0);
   }, 0);
 
-  const answeredCount = answers?.length || 0;
+  const answeredCount =
+    answers?.filter((a) => a.value && a.value.trim() !== "").length || 0;
 
-  const progressPercent = ((currentStep + 1) / totalSteps) * 100;
+  const questionsBeforeCurrentStep = steps
+    .slice(0, currentStep)
+    .reduce((total, step) => total + (step.questions?.length || 0), 0);
+
+  const currentQuestionIndex = useSelector(
+    (state) => state.quiz.currentQuestionIndex || 0
+  );
+
+  const currentQuestionNumber =
+    questionsBeforeCurrentStep + currentQuestionIndex + 1;
+
+  const progressPercent = (currentQuestionNumber / totalQuestions) * 100;
 
   return (
     <div className="w-full">
       <div className="flex justify-between mb-2 text-sm text-gray-600">
-        Step {currentStep + 1} of {totalSteps}
+        Question {currentQuestionNumber} of {totalQuestions}
       </div>
-      <div className={styles.progressSubLabel}>
+      <div className="mb-1 text-sm text-gray-500">
         Answered {answeredCount} of {totalQuestions} questions
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2">
