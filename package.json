@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
     "@reduxjs/toolkit": "^2.7.0",
     "contentful": "^11.5.18",
     "formik": "^2.4.6",

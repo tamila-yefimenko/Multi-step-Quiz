@@ -15,7 +15,7 @@ const Button = ({
   };
 
   const baseStyles =
-    "px-4 py-2 rounded-lg font-medium transition-colors duration-200";
+    "px-4 py-2 rounded-lg font-medium transition-colors focus:outline-transparent duration-200";
 
   const disabledStyles = "bg-gray-300 text-gray-500 cursor-not-allowed";
 

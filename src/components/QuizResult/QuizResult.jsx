@@ -11,7 +11,7 @@ function QuizResult() {
   const isLoaded = useSelector(selectIsLoaded);
 
   if (!isLoaded) {
-    return <p>Loadind your results...</p>;
+    return <p className="text-gray-500">Loadind your results...</p>;
   }
 
   const correctCount = steps.reduce((sum, step) => {
@@ -21,7 +21,8 @@ function QuizResult() {
         const userAnswer = answers.find(
           (a) => a.questionId === q.sys.id
         )?.value;
-        return userAnswer === q.fields.correctAnswer;
+
+        return Boolean(userAnswer) && userAnswer === q.fields.correctAnswer;
       }).length
     );
   }, 0);
@@ -31,27 +32,52 @@ function QuizResult() {
     0
   );
 
-  const getAnswerStatus = (question) => {
-    const userAnswer = answers.find(
-      (a) => a.questionId === question.sys.id
-    )?.value;
-    if (!userAnswer) return { text: "No answer", color: "gray" };
-    return userAnswer === question.fields.correctAnswer
-      ? { text: "✔️ Correct", color: "green" }
-      : { text: "❌ Incorrect", color: "#c0392b" };
-  };
+  const percentage = Math.round((correctCount / totalQuestions) * 100);
+
+  // const getAnswerStatus = (question) => {
+  //   const userAnswer = answers.find(
+  //     (a) => a.questionId === question.sys.id
+  //   )?.value;
+  //   if (!userAnswer) return { text: "No answer", color: "gray" };
+  //   return userAnswer === question.fields.correctAnswer
+  //     ? { text: "✔️ Correct", color: "green" }
+  //     : { text: "❌ Incorrect", color: "#c0392b" };
+  // };
 
   return (
-    <div className="quiz-result">
-      <h2>
-        Your result: {correctCount} / {totalQuestions} (
-        {Math.round((correctCount / totalQuestions) * 100)}%)
+    <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 shadow-inner space-y-4 w-full">
+      <h2 className="text-xl font-semibold text-gray-800">
+        Your score:{" "}
+        <span className="text-orange-600 font-bold">
+          {correctCount} / {totalQuestions}
+        </span>{" "}
+        ({percentage}%)
       </h2>
 
-      {steps.map((step) => (
-        <div key={step.id} className="step-result">
-          <h3>{step.title}</h3>
-          {step.questions.map((q) => {
+      <div className="w-full bg-gray-200 rounded-full h-4">
+        <div
+          className="bg-orange-500 h-4 rounded-full transition-all duration-500"
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
+
+      {percentage === 100 && (
+        <p className="text-green-600 font-medium">
+          🎉 Perfect! You answered all questions correctly!
+        </p>
+      )}
+      {percentage >= 70 && percentage < 100 && (
+        <p className="text-blue-600 font-medium">
+          👍 Great job! You did really well!
+        </p>
+      )}
+      {percentage < 70 && (
+        <p className="text-red-600 font-medium">
+          💡 Keep practicing! You can improve next time.
+        </p>
+      )}
+      {/* <h3>{step.title}</h3> */}
+      {/* {step.questions.map((q) => {
             const userAnswer = answers.find(
               (a) => a.questionId === q.sys.id
             )?.value;
@@ -73,9 +99,9 @@ function QuizResult() {
                 </p>
               </div>
             );
-          })}
-        </div>
-      ))}
+          })} */}
+      {/* </div> */}
+      {/* ))} */}
     </div>
   );
 }
