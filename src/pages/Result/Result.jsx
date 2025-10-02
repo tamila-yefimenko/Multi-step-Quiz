@@ -4,6 +4,7 @@ import { resetQuiz } from "../../redux/quiz/quizSlice";
 import { clearUserName } from "../../redux/userName/userNameSlice";
 import { selectUserName } from "../../redux/userName/selectors";
 import QuizResult from "../../components/QuizResult/QuizResult";
+import Button from "../../components/Button/Button";
 
 const Result = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Result = () => {
   const handleRestart = () => {
     dispatch(resetQuiz());
     dispatch(clearUserName());
-    navigate("/quiz");
+    navigate("/");
   };
 
   return (
@@ -24,11 +25,7 @@ const Result = () => {
 
       <QuizResult />
 
-      <button
-        className="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600"
-        onClick={handleRestart}>
-        Take the test again
-      </button>
+      <Button onClick={handleRestart}>Take the test again</Button>
     </div>
   );
 };

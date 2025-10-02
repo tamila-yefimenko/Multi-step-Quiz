@@ -1,3 +1,49 @@
 #root {
   margin: 0 auto;
 }
+
+.animated-bg {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fff6f0, #ffe9dc);
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 120px;
+  background: rgba(255, 153, 102, 0.3);
+  border-radius: 100%;
+  animation: waveMove 8s linear infinite;
+}
+
+.wave:nth-child(1) {
+  bottom: 0;
+  animation-duration: 12s;
+  opacity: 0.5;
+}
+
+.wave:nth-child(2) {
+  bottom: 20px;
+  background: rgba(255, 136, 77, 0.25);
+  animation-duration: 10s;
+  opacity: 0.7;
+}
+
+.wave:nth-child(3) {
+  bottom: 40px;
+  background: rgba(255, 119, 51, 0.2);
+  animation-duration: 14s;
+  opacity: 0.6;
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

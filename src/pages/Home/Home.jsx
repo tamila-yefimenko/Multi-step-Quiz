@@ -2,18 +2,27 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { setUserName } from "../../redux/userName/operations";
+import { setUserName } from "../../redux/userName/userNameSlice";
+import { useEffect } from "react";
+import { resetQuiz } from "../../redux/quiz/quizSlice";
+import Button from "../../components/Button/Button";
 
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(resetQuiz());
+  }, [dispatch]);
+
   return (
-    <div className="home-container">
-      <h1 className="text-xl font-medium text-blue-500">
+    <div className="max-w-2xl mx-auto gap-5 bg-white rounded-2xl shadow-lg p-6 space-y-5 min-h-[50vh] flex flex-col justify-around items-center">
+      <h1 className="text-4xl font-bold text-orange-500 text-center">
         Welcome to our quiz!
       </h1>
-      <p>Follow a few steps to get a personalized result.</p>
+      <p className="text-xl text-gray-700 text-center">
+        Follow a few steps to get a personalized result.
+      </p>
 
       <Formik
         initialValues={{ name: "" }}
@@ -24,18 +33,32 @@ function Home() {
           dispatch(setUserName(values.name));
           navigate("/quiz");
         }}>
-        {({ isValid, dirty }) => (
-          <Form className="name-form">
-            <label htmlFor="name">Enter your name:</label>
-            <Field name="name" type="text" placeholder="Your name" />
-            <ErrorMessage name="name" component="div" className="error" />
+        {({ errors, touched, isValid, dirty }) => (
+          <Form className="flex flex-col gap-4 w-full max-w-md">
+            <label htmlFor="name" className="font-medium text-gray-700">
+              Enter your name:
+            </label>
+            <Field
+              name="name"
+              type="text"
+              placeholder="Your name"
+              className="w-full border border-gray-300 bg-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
+            />
+            <div
+              className={`text-red-500 text-sm min-h-[1.25rem] transition-all duration-300 ease-in-out ${
+                errors.name && touched.name
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 -translate-y-1"
+              }`}>
+              <ErrorMessage name="name" />
+            </div>
 
-            <button
+            <Button
               type="submit"
-              className="bg-orange-500 text-white rounded-xl px-6 py-3  hover:bg-orange-600"
+              className="bg-orange-500 text-white rounded-xl px-6 py-3 hover:bg-orange-600 transition"
               disabled={!(isValid && dirty)}>
               Start the test
-            </button>
+            </Button>
           </Form>
         )}
       </Formik>

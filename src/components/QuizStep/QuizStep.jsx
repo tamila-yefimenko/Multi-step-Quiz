@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentStep,
+  selectCurrentQuestionIndex,
   selectSteps,
   selectAnswers,
   selectIsLoaded,
@@ -10,20 +11,24 @@ import {
   submitAnswer,
   nextStep,
   previousStep,
+  nextQuestion,
+  previousQuestion,
 } from "../../redux/quiz/quizSlice";
 import { fetchSteps } from "../../redux/quiz/operations";
 import { useNavigate } from "react-router-dom";
+import Button from "../Button/Button";
 
 function QuizStep() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const currentStep = useSelector(selectCurrentStep);
+  const currentQuestionIndex = useSelector(selectCurrentQuestionIndex);
   const steps = useSelector(selectSteps);
   const answers = useSelector(selectAnswers);
   const isLoaded = useSelector(selectIsLoaded);
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -32,8 +37,10 @@ function QuizStep() {
   }, [dispatch, isLoaded]);
 
   useEffect(() => {
-    setCurrentQuestionIndex(0);
-  }, [currentStep]);
+    setAnimate(true);
+    const timeout = setTimeout(() => setAnimate(false), 300);
+    return () => clearTimeout(timeout);
+  }, [currentQuestionIndex, currentStep]);
 
   if (!isLoaded || steps.length === 0) {
     return <p>Loading steps...</p>;
@@ -61,7 +68,7 @@ function QuizStep() {
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((i) => i + 1);
+      dispatch(nextQuestion());
     } else {
       dispatch(nextStep());
     }
@@ -69,82 +76,80 @@ function QuizStep() {
 
   const handlePreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((i) => i - 1);
-    } else {
+      dispatch(previousQuestion());
+    } else if (currentStep > 0) {
       dispatch(previousStep());
     }
   };
 
+  const isFirstQuestion = currentStep === 0 && currentQuestionIndex === 0;
   const isLastStep = currentStep === steps.length - 1;
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   return (
-    <div>
-      <h2>
-        Step {currentStep + 1}: {step.title}
-      </h2>
+    <div className="flex flex-col min-h-[400px] justify-between">
+      <div className="space-y-6">
+        <h2 className="text-xl font-semibold">
+          Step {currentStep + 1}: {step.title}
+        </h2>
 
-      <div key={questionId} className="space-y-4 py-5">
-        <p className="text-xl font-semibold">{questionText}</p>
-
-        {(questionType === "multiple_choice" || questionType === "scale") && (
-          <div className="flex flex-col gap-3">
-            {possibleAnswers?.map((option) => (
-              <label
-                key={option}
-                className={`p-3 border rounded-lg cursor-pointer transition 
-            ${
-              currentAnswer === option
-                ? "bg-orange-100 border-orange-400"
-                : "hover:bg-gray-100"
+        <div
+          key={questionId}
+          className={`space-y-4 p-5 bg-gray-50 rounded-xl shadow-sm min-h-[350px]
+            transition-all ease-in-out duration-200 transform ${
+              animate ? "opacity-0 translate-y-1" : "opacity-100 translate-y-0"
             }`}>
-                <input
-                  type="radio"
-                  name={questionId}
-                  value={option}
-                  checked={currentAnswer === option}
-                  onChange={() => handleAnswer(questionId, option)}
-                  className="hidden"
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-        )}
+          <p className="text-xl font-normal">{questionText}</p>
 
-        {questionType === "open_ended" && (
-          <input
-            type="text"
-            value={currentAnswer}
-            onChange={(e) => handleAnswer(questionId, e.target.value)}
-            className="w-full p-2 border rounded-lg"
-          />
-        )}
+          {(questionType === "multiple_choice" || questionType === "scale") && (
+            <div className="flex flex-col gap-2">
+              {possibleAnswers?.map((option) => (
+                <label
+                  key={option}
+                  className={`p-3 bg-white border rounded-lg cursor-pointer transition
+                    ${
+                      currentAnswer === option
+                        ? "bg-orange-100 border-orange-400"
+                        : "hover:bg-gray-100"
+                    }`}>
+                  <input
+                    type="radio"
+                    name={questionId}
+                    value={option}
+                    checked={currentAnswer === option}
+                    onChange={() => handleAnswer(questionId, option)}
+                    className="hidden"
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
+          )}
+
+          {questionType === "open_ended" && (
+            <input
+              type="text"
+              value={currentAnswer}
+              onChange={(e) => handleAnswer(questionId, e.target.value)}
+              className="w-full p-3 border rounded-lg bg-white focus:outline-orange-400"
+            />
+          )}
+        </div>
       </div>
 
-      <div className="flex justify-between items-center">
-        {!(currentStep === 0 && currentQuestionIndex === 0) ? (
-          <button
-            className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
-            onClick={handlePreviousQuestion}>
+      <div className="flex justify-between items-center mt-4">
+        {!isFirstQuestion ? (
+          <Button variant="secondary" onClick={handlePreviousQuestion}>
             Go back
-          </button>
+          </Button>
         ) : (
-          <div />
+          <div className="w-24" />
         )}
 
         {isLastStep && isLastQuestion ? (
-          <button
-            className="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600"
-            onClick={() => navigate("/result")}>
-            Finish
-          </button>
+          <Button onClick={() => navigate("/result")}>Finish</Button>
         ) : (
-          <button
-            className="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600"
-            onClick={handleNextQuestion}>
-            Next
-          </button>
+          <Button onClick={handleNextQuestion}>Next</Button>
         )}
       </div>
     </div>

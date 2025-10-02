@@ -4,6 +4,7 @@ import { fetchSteps } from "./operations";
 const initialState = {
   currentStep: 0,
   steps: [],
+  currentQuestionIndex: 0,
   answers: [],
   isLoaded: false,
   error: null,
@@ -15,9 +16,22 @@ const quizSlice = createSlice({
   reducers: {
     nextStep: (state) => {
       state.currentStep += 1;
+      state.currentQuestionIndex = 0;
     },
     previousStep: (state) => {
       state.currentStep -= 1;
+      state.currentQuestionIndex = 0;
+    },
+    nextQuestion: (state) => {
+      const step = state.steps[state.currentStep];
+      if (state.currentQuestionIndex < step.questions.length - 1) {
+        state.currentQuestionIndex += 1;
+      }
+    },
+    previousQuestion: (state) => {
+      if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex -= 1;
+      }
     },
     submitAnswer: (state, action) => {
       const { questionId, value } = action.payload;
@@ -32,6 +46,7 @@ const quizSlice = createSlice({
       state.currentStep = 0;
       state.steps = [];
       state.answers = [];
+      state.currentQuestionIndex = 0;
       state.isLoaded = false;
       state.error = null;
     },
@@ -54,6 +69,12 @@ const quizSlice = createSlice({
   },
 });
 
-export const { nextStep, previousStep, submitAnswer, resetQuiz } =
-  quizSlice.actions;
+export const {
+  nextStep,
+  previousStep,
+  nextQuestion,
+  previousQuestion,
+  submitAnswer,
+  resetQuiz,
+} = quizSlice.actions;
 export default quizSlice.reducer;

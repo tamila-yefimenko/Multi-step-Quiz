@@ -7,24 +7,24 @@ const Button = ({
   variant = "primary",
   disabled = false,
 }) => {
-  const baseStyles =
-    "px-4 py-2 rounded-xl font-medium transition-colors duration-200";
-
   const variants = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    secondary: "bg-gray-300 text-gray-800 hover:bg-gray-400",
+    primary: "bg-orange-500 text-white hover:bg-orange-600",
+    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
     danger: "bg-red-500 text-white hover:bg-red-600",
-    outline: "border border-blue-600 text-blue-600 hover:bg-blue-50",
+    outline: "border border-orange-500 text-orange-500 hover:bg-orange-50",
   };
 
-  const disabledStyles = "opacity-50 cursor-not-allowed";
+  const baseStyles =
+    "px-4 py-2 rounded-lg font-medium transition-colors duration-200";
+
+  const disabledStyles = "bg-gray-300 text-gray-500 cursor-not-allowed";
 
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${
-        disabled ? disabledStyles : ""
+      className={`${baseStyles} ${
+        disabled ? disabledStyles : variants[variant]
       }`}
       disabled={disabled}>
       {children}

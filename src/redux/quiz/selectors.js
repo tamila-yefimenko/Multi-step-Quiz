@@ -2,6 +2,8 @@ export const selectCurrentStep = (state) => state.quiz.currentStep;
 export const selectSteps = (state) => state.quiz.steps;
 export const selectAnswers = (state) => state.quiz.answers;
 export const selectIsLoaded = (state) => state.quiz.isLoaded;
+export const selectCurrentQuestionIndex = (state) =>
+  state.quiz.currentQuestionIndex;
 
 export const selectCurrentQuestion = (state) => {
   const step = state.quiz.steps[state.quiz.currentStep];

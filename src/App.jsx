@@ -11,14 +11,21 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 function App() {
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
-      <div className="container px-4">
+      <div className="animated-bg">
+        <div className="wave"></div>
+        <div className="wave"></div>
+        <div className="wave"></div>
+
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/result" element={<Result />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+
+        <div className="container relative z-10 px-4 py-6 mx-auto">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/result" element={<Result />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
       </div>
     </Suspense>
   );

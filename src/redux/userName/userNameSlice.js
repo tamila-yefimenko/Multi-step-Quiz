@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setUserName } from "./operations";
+// import { setUserName } from "./operations";
 
 const initialState = {
   userName: "",
@@ -9,14 +9,12 @@ const userNameSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    clearUserName: () => ({ userName: "" }),
-  },
-  extraReducers: (builder) => {
-    builder.addCase(setUserName, (state, action) => {
+    setUserName: (state, action) => {
       state.userName = action.payload;
-    });
+    },
+    clearUserName: () => ({ userName: "" }),
   },
 });
 
-export const { clearUserName } = userNameSlice.actions;
+export const { setUserName, clearUserName } = userNameSlice.actions;
 export default userNameSlice.reducer;
