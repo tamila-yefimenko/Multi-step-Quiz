@@ -1,12 +1,75 @@
-# React + Vite
+# 🟠 Quiz App 🎉
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Quiz App** – an interactive quiz platform where you can test your knowledge and get personalized results!
 
-Currently, two official plugins are available:
+![Quiz App Screenshot](/public/screenshots/home.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🟧 **Personalized greeting** – enter your name before the quiz  
+🟠 **Step-by-step quiz** – grouped into multiple stages  
+📊 **Progress bar** – shows your journey through the quiz  
+✅ **Multiple choice & open-ended questions**  
+📂 **Detailed results modal** – check correct & incorrect answers  
+🏆 **Final results** – score, percentage & motivation message  
+🔄 **Restart option** – retake the quiz any time  
+💾 **Persistent state** with Redux Persist
+
+---
+
+## 🛠️ Tech Stack
+
+- ⚛️ **React** – components
+- 🌐 **React Router** – page navigation
+- 🗂 **Redux Toolkit** – global state management
+- 💾 **Redux Persist** – saving quiz progress
+- 🎨 **Tailwind CSS** – modern responsive styles
+- ✨ **Headless UI** – transitions & modals
+- ✨ **Contentful API** – to fetch quiz questions and answer choices
+
+---
+
+## 🚀 Getting Started
+
+1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/tamila-yefimenko/Multi-step-Quiz
+
+```
+
+2️⃣ Install dependencies
+
+npm install
+
+3️⃣ Start the project
+
+npm run dev
+Your app will be running at 👉 http://localhost:5173
+
+---
+
+📸 ## Screenshots
+🏠 Home Page
+
+Welcome screen with username input and start button.
+
+📝 Quiz Steps
+
+Questions with multiple choice and text input.
+(/public/screenshots/quiz.png)
+
+🏆 Results
+
+Final score, percentage & feedback.
+(/public/screenshots/results.png)
+
+---
+
+🔮## Future Plans
+
+🔍 Add Algolia integration for dynamic questions
+🌍 Expand quiz themes (Travel, Culture, Technology)
+👤 User login & history saving
