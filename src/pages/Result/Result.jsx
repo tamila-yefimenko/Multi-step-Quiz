@@ -23,7 +23,7 @@ const Result = () => {
     <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-8 space-y-6 min-h-[60vh] flex flex-col justify-between items-center text-center">
       <div className="space-y-3 py-4">
         <img
-          src="../public/party-hat_8944501.png"
+          src="/public/party-hat_8944501.png"
           alt="Trophy"
           className="w-20  mx-auto animate-bounce"
         />
