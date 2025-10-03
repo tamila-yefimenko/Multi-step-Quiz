@@ -20,7 +20,7 @@ function Home() {
       <h1 className="text-4xl font-bold mt-0 text-orange-500 text-center">
         Welcome to our quiz!
       </h1>
-      <img src="/public/home.png" alt="Welcome quiz" className="w-48 m-0" />
+      <img src="/home.png" alt="Welcome quiz" className="w-48 m-0" />
       <p className="text-xl text-gray-700 text-center">
         Follow a few steps to get a personalized result.
       </p>
