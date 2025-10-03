@@ -27,7 +27,7 @@ Welcome to **Quiz App** – an interactive quiz platform where you can test your
 - 💾 **Redux Persist** – saving quiz progress
 - 🎨 **Tailwind CSS** – modern responsive styles
 - ✨ **Headless UI** – transitions & modals
-- ✨ **Contentful API** – to fetch quiz questions and answer choices
+- 🌍 **Contentful API** – to fetch quiz questions and answer choices
 
 ---
 
@@ -61,18 +61,18 @@ Welcome screen with username input and start button.
 
 Questions with multiple choice and text input.
 
-<img src="/public/screenshots/quiz.png" alt="Quiz Screenshot" style="width:40%;"/>
+<img src="/public/screenshots/quiz.png" alt="Quiz Screenshot" style="width:30%;"/>
 
 🏆 Results
 
 Final score, percentage & feedback.
 
-<img src="/public/screenshots/results.png" alt="Results Screenshot" style="width:40%;"/>
+<img src="/public/screenshots/results.png" alt="Results Screenshot" style="width:30%;"/>
 
 ---
 
 ## 🔮 Future Plans
 
-🔍 Add Algolia integration for dynamic questions
-🌍 Expand quiz themes (Travel, Culture, Technology)
-👤 User login & history saving
+- 🔍 Add Algolia integration for dynamic questions
+- 🌍 Expand quiz themes (Travel, Culture, Technology)
+- 👤 User login & history saving
