@@ -2,7 +2,7 @@
 
 Welcome to **Quiz App** – an interactive quiz platform where you can test your knowledge and get personalized results!
 
-<img src="/public/screenshots/home.png" alt="Home Screenshot" style="width:60%;"/>
+<img src="/public/screenshots/home.png" alt="Home Screenshot" style="width:50%;"/>
 
 ---
 
@@ -60,12 +60,14 @@ Welcome screen with username input and start button.
 📝 Quiz Steps
 
 Questions with multiple choice and text input.
-<img src="/public/screenshots/quiz.png" alt="Quiz Screenshot" style="width:60%;"/>
+
+<img src="/public/screenshots/quiz.png" alt="Quiz Screenshot" style="width:40%;"/>
 
 🏆 Results
 
 Final score, percentage & feedback.
-<img src="/public/screenshots/results.png" alt="Results Screenshot" style="width:60%;"/>
+
+<img src="/public/screenshots/results.png" alt="Results Screenshot" style="width:40%;"/>
 
 ---
 
