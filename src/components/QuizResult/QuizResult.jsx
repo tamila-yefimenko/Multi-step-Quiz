@@ -22,7 +22,10 @@ function QuizResult() {
           (a) => a.questionId === q.sys.id
         )?.value;
 
-        return Boolean(userAnswer) && userAnswer === q.fields.correctAnswer;
+        return (
+          Boolean(userAnswer) &&
+          userAnswer.toLowerCase() === q.fields.correctAnswer.toLowerCase()
+        );
       }).length
     );
   }, 0);

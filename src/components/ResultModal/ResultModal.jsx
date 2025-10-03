@@ -12,7 +12,8 @@ export default function ResultModal({ isOpen, onClose }) {
       (a) => a.questionId === question.sys.id
     )?.value;
     if (!userAnswer) return { text: "No answer", color: "text-gray-500" };
-    return userAnswer === question.fields.correctAnswer
+    return userAnswer.toLowerCase() ===
+      question.fields.correctAnswer.toLowerCase()
       ? { text: "✔️ Correct", color: "text-green-600" }
       : { text: "❌ Incorrect", color: "text-red-600" };
   };
