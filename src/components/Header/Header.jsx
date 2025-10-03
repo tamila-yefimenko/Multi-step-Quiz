@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="mx-auto flex max-w-100 justify-center rounded-xl p-6 shadow-lg outline-black/5 bg-orange-400">
+      <header className="mx-auto flex max-w-100 justify-center rounded-xl p-6 shadow-lg outline-black/5 bg-orange-400/70">
         <nav>
           <ul className="flex gap-x-6 text-xl font-medium ">
             <li>

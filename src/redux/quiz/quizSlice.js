@@ -19,8 +19,13 @@ const quizSlice = createSlice({
       state.currentQuestionIndex = 0;
     },
     previousStep: (state) => {
-      state.currentStep -= 1;
-      state.currentQuestionIndex = 0;
+      if (state.currentStep > 0) {
+        state.currentStep -= 1;
+        const prevStepQuestions =
+          state.steps[state.currentStep]?.questions || [];
+        state.currentQuestionIndex =
+          prevStepQuestions.length > 0 ? prevStepQuestions.length - 1 : 0;
+      }
     },
     nextQuestion: (state) => {
       const step = state.steps[state.currentStep];

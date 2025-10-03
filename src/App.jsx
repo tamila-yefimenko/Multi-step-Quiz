@@ -11,11 +11,7 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 function App() {
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
-      <div className="animated-bg">
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-
+      <div className="relative min-h-screen overflow-hidden bg-cover bg-center bg-gray-700 bg-[url(/public/bg2.jpg)] bg-blend-lighten ">
         <Header />
 
         <div className="container relative z-10 px-4 py-6 mx-auto">

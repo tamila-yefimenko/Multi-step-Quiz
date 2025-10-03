@@ -2,7 +2,7 @@
   margin: 0 auto;
 }
 
-.animated-bg {
+/* .animated-bg {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
@@ -46,4 +46,4 @@
   100% {
     transform: translateX(-50%);
   }
-}
+} */

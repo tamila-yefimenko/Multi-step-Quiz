@@ -87,7 +87,7 @@ function QuizStep() {
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   return (
-    <div className="flex flex-col min-h-[400px] justify-between">
+    <div className="flex flex-col min-h-[450px] justify-between">
       <div className="space-y-6">
         <h2 className="text-xl font-semibold">
           Step {currentStep + 1}: {step.title}
@@ -95,7 +95,7 @@ function QuizStep() {
 
         <div
           key={questionId}
-          className={`space-y-4 p-5 bg-gray-50 rounded-xl shadow-sm min-h-[350px]
+          className={`space-y-4 p-5 bg-gray-100 rounded-xl shadow-sm min-h-[400px]
             transition-all ease-in-out duration-200 transform ${
               animate ? "opacity-0 translate-y-1" : "opacity-100 translate-y-0"
             }`}>
@@ -109,8 +109,8 @@ function QuizStep() {
                   className={`p-3 bg-white border rounded-lg cursor-pointer transition
                     ${
                       currentAnswer === option
-                        ? "bg-orange-100 border-orange-400"
-                        : "hover:bg-gray-100"
+                        ? "bg-orange-50 border-orange-400"
+                        : "hover:bg-orange-50"
                     }`}>
                   <input
                     type="radio"

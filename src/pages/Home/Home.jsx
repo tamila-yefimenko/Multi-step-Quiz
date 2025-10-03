@@ -16,10 +16,15 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div className="max-w-2xl mx-auto gap-5 bg-white rounded-2xl shadow-lg p-6 space-y-5 min-h-[50vh] flex flex-col justify-around items-center">
-      <h1 className="text-4xl font-bold text-orange-500 text-center">
+    <div className="max-w-2xl mx-auto gap-5 bg-white rounded-2xl shadow-2xl p-6 space-y-5 min-h-[50vh] flex flex-col justify-around items-center">
+      <h1 className="text-4xl font-bold mt-0 text-orange-500 text-center">
         Welcome to our quiz!
       </h1>
+      <img
+        src="../../public/home.png"
+        alt="Welcome quiz"
+        className="w-48 m-0"
+      />
       <p className="text-xl text-gray-700 text-center">
         Follow a few steps to get a personalized result.
       </p>
@@ -42,7 +47,7 @@ function Home() {
               name="name"
               type="text"
               placeholder="Your name"
-              className="w-full border border-gray-300 bg-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
+              className="w-full border border-gray-300 bg-gray-100 rounded-lg p-3 hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
             />
             <div
               className={`text-red-500 text-sm min-h-[1.25rem] transition-all duration-300 ease-in-out ${
@@ -53,10 +58,7 @@ function Home() {
               <ErrorMessage name="name" />
             </div>
 
-            <Button
-              type="submit"
-              className="bg-orange-500 text-white rounded-xl px-6 py-3 hover:bg-orange-600 transition"
-              disabled={!(isValid && dirty)}>
+            <Button type="submit" disabled={!(isValid && dirty)}>
               Start the test
             </Button>
           </Form>

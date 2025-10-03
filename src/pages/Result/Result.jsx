@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetQuiz } from "../../redux/quiz/quizSlice";
-import { clearUserName } from "../../redux/userName/userNameSlice";
 import { selectUserName } from "../../redux/userName/selectors";
 import QuizResult from "../../components/QuizResult/QuizResult";
 import Button from "../../components/Button/Button";
@@ -17,8 +16,7 @@ const Result = () => {
 
   const handleRestart = () => {
     dispatch(resetQuiz());
-    dispatch(clearUserName());
-    navigate("/");
+    navigate("/quiz");
   };
 
   return (

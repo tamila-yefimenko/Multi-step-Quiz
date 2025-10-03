@@ -34,16 +34,6 @@ function QuizResult() {
 
   const percentage = Math.round((correctCount / totalQuestions) * 100);
 
-  // const getAnswerStatus = (question) => {
-  //   const userAnswer = answers.find(
-  //     (a) => a.questionId === question.sys.id
-  //   )?.value;
-  //   if (!userAnswer) return { text: "No answer", color: "gray" };
-  //   return userAnswer === question.fields.correctAnswer
-  //     ? { text: "✔️ Correct", color: "green" }
-  //     : { text: "❌ Incorrect", color: "#c0392b" };
-  // };
-
   return (
     <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 shadow-inner space-y-4 w-full">
       <h2 className="text-xl font-semibold text-gray-800">
@@ -76,32 +66,6 @@ function QuizResult() {
           💡 Keep practicing! You can improve next time.
         </p>
       )}
-      {/* <h3>{step.title}</h3> */}
-      {/* {step.questions.map((q) => {
-            const userAnswer = answers.find(
-              (a) => a.questionId === q.sys.id
-            )?.value;
-            const status = getAnswerStatus(q);
-
-            return (
-              <div key={q.sys.id} className="question-result">
-                <p>
-                  <strong>Question:</strong> {q.fields.questionText}
-                </p>
-                <p>
-                  <strong>Your answer:</strong> {userAnswer || "—"}
-                </p>
-                <p>
-                  <strong>Correct answer:</strong> {q.fields.correctAnswer}
-                </p>
-                <p style={{ color: status.color, fontWeight: "bold" }}>
-                  {status.text}
-                </p>
-              </div>
-            );
-          })} */}
-      {/* </div> */}
-      {/* ))} */}
     </div>
   );
 }
