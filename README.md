@@ -2,7 +2,7 @@
 
 Welcome to **Quiz App** – an interactive quiz platform where you can test your knowledge and get personalized results!
 
-![Quiz App Screenshot](/public/screenshots/home.png)
+<img src="/public/screenshots/home.png" alt="Home Screenshot" style="width:60%;"/>
 
 ---
 
@@ -51,7 +51,8 @@ Your app will be running at 👉 http://localhost:5173
 
 ---
 
-📸 ## Screenshots
+## 📸 Screenshots
+
 🏠 Home Page
 
 Welcome screen with username input and start button.
@@ -59,16 +60,16 @@ Welcome screen with username input and start button.
 📝 Quiz Steps
 
 Questions with multiple choice and text input.
-(/public/screenshots/quiz.png)
+<img src="/public/screenshots/quiz.png" alt="Quiz Screenshot" style="width:60%;"/>
 
 🏆 Results
 
 Final score, percentage & feedback.
-(/public/screenshots/results.png)
+<img src="/public/screenshots/results.png" alt="Results Screenshot" style="width:60%;"/>
 
 ---
 
-🔮## Future Plans
+## 🔮 Future Plans
 
 🔍 Add Algolia integration for dynamic questions
 🌍 Expand quiz themes (Travel, Culture, Technology)
