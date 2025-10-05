@@ -6,7 +6,7 @@ const initialState = {
   steps: [],
   currentQuestionIndex: 0,
   answers: [],
-  isLoaded: false,
+  isLoading: false,
   error: null,
 };
 
@@ -52,7 +52,7 @@ const quizSlice = createSlice({
       state.steps = [];
       state.answers = [];
       state.currentQuestionIndex = 0;
-      state.isLoaded = false;
+      state.isLoading = false;
       state.error = null;
     },
   },
@@ -60,16 +60,16 @@ const quizSlice = createSlice({
     builder
       .addCase(fetchSteps.fulfilled, (state, action) => {
         state.steps = action.payload;
-        state.isLoaded = true;
+        state.isLoading = false;
         state.error = null;
       })
       .addCase(fetchSteps.pending, (state) => {
-        state.isLoaded = false;
+        state.isLoading = true;
       })
       .addCase(fetchSteps.rejected, (state, action) => {
         state.steps = [];
-        state.isLoaded = false;
-        state.error = action.payload;
+        state.isLoading = false;
+        state.error = action.payload || "Failed to fetch steps";
       });
   },
 });

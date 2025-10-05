@@ -12,12 +12,16 @@
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@reduxjs/toolkit": "^2.7.0",
+    "algoliasearch": "^5.39.0",
     "contentful": "^11.5.18",
     "formik": "^2.4.6",
+    "instantsearch.js": "^4.80.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-instantsearch": "^7.16.3",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.3",
+    "react-spinners": "^0.17.0",
     "redux-persist": "^6.0.0",
     "yup": "^1.6.1"
   },

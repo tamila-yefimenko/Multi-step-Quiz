@@ -2,17 +2,19 @@ import { useSelector } from "react-redux";
 import {
   selectSteps,
   selectAnswers,
-  selectIsLoaded,
+  selectIsLoading,
 } from "../../redux/quiz/selectors";
+import { selectUserName } from "../../redux/userName/selectors";
+import { useEffect, useState } from "react";
+import { client } from "../../services/algolia";
 
 function QuizResult() {
   const steps = useSelector(selectSteps);
   const answers = useSelector(selectAnswers);
-  const isLoaded = useSelector(selectIsLoaded);
+  const isLoading = useSelector(selectIsLoading);
+  const userName = useSelector(selectUserName);
 
-  if (!isLoaded) {
-    return <p className="text-gray-500">Loadind your results...</p>;
-  }
+  const [hasSaved, setHasSaved] = useState(false);
 
   const correctCount = steps.reduce((sum, step) => {
     return (
@@ -36,6 +38,50 @@ function QuizResult() {
   );
 
   const percentage = Math.round((correctCount / totalQuestions) * 100);
+
+  useEffect(() => {
+    if (!isLoading && steps.length > 0 && !hasSaved) {
+      const objectToSave = {
+        objectID: `${Date.now()}_${userName || "anonymous"}`,
+        userName: userName || "Anonymous",
+        score: correctCount,
+        totalQuestions,
+        percentage,
+        answers,
+        createdAt: Date.now(),
+      };
+
+      client
+        .saveObject({
+          indexName: "quiz_results",
+          body: objectToSave,
+        })
+        .then(() => {
+          console.log("Saved to Algolia:", objectToSave);
+          setHasSaved(true);
+        })
+        .catch((err) => {
+          console.error("Error saving to Algolia:", err);
+        });
+    }
+  }, [
+    isLoading,
+    steps,
+    hasSaved,
+    userName,
+    correctCount,
+    totalQuestions,
+    percentage,
+    answers,
+  ]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 shadow-inner space-y-4 w-full">

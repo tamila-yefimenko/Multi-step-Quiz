@@ -5,7 +5,6 @@ import {
   selectCurrentQuestionIndex,
   selectSteps,
   selectAnswers,
-  selectIsLoaded,
 } from "../../redux/quiz/selectors";
 import {
   submitAnswer,
@@ -14,7 +13,7 @@ import {
   nextQuestion,
   previousQuestion,
 } from "../../redux/quiz/quizSlice";
-import { fetchSteps } from "../../redux/quiz/operations";
+// import { fetchSteps } from "../../redux/quiz/operations";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
@@ -26,15 +25,15 @@ function QuizStep() {
   const currentQuestionIndex = useSelector(selectCurrentQuestionIndex);
   const steps = useSelector(selectSteps);
   const answers = useSelector(selectAnswers);
-  const isLoaded = useSelector(selectIsLoaded);
+  // const isLoading = useSelector(selectIsLoading);
 
   const [animate, setAnimate] = useState(false);
 
-  useEffect(() => {
-    if (!isLoaded) {
-      dispatch(fetchSteps());
-    }
-  }, [dispatch, isLoaded]);
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     dispatch(fetchSteps());
+  //   }
+  // }, [dispatch, isLoading]);
 
   useEffect(() => {
     setAnimate(true);
@@ -42,8 +41,8 @@ function QuizStep() {
     return () => clearTimeout(timeout);
   }, [currentQuestionIndex, currentStep]);
 
-  if (!isLoaded || steps.length === 0) {
-    return <p>Loading steps...</p>;
+  if (!steps.length) {
+    return null; // контент не рендеримо, loader уже на Quiz.jsx
   }
 
   const step = steps[currentStep];
