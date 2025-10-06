@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { setUserName } from "./operations";
 
 const initialState = {
   userName: "",

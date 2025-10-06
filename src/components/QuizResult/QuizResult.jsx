@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   selectSteps,
   selectAnswers,
@@ -7,13 +7,15 @@ import {
 import { selectUserName } from "../../redux/userName/selectors";
 import { useEffect, useState } from "react";
 import { client } from "../../services/algolia";
+import Loader from "../Loader/Loader";
+import { setCurrentResult, markSaved } from "../../redux/results/resultsSlice";
 
 function QuizResult() {
+  const dispatch = useDispatch();
   const steps = useSelector(selectSteps);
   const answers = useSelector(selectAnswers);
   const isLoading = useSelector(selectIsLoading);
   const userName = useSelector(selectUserName);
-
   const [hasSaved, setHasSaved] = useState(false);
 
   const correctCount = steps.reduce((sum, step) => {
@@ -41,8 +43,8 @@ function QuizResult() {
 
   useEffect(() => {
     if (!isLoading && steps.length > 0 && !hasSaved) {
-      const objectToSave = {
-        objectID: `${Date.now()}_${userName || "anonymous"}`,
+      const result = {
+        objectID: userName || "anonymous",
         userName: userName || "Anonymous",
         score: correctCount,
         totalQuestions,
@@ -51,14 +53,17 @@ function QuizResult() {
         createdAt: Date.now(),
       };
 
+      dispatch(setCurrentResult(result));
+
       client
         .saveObject({
           indexName: "quiz_results",
-          body: objectToSave,
+          body: result,
         })
         .then(() => {
-          console.log("Saved to Algolia:", objectToSave);
+          console.log("Saved to Algolia:", result);
           setHasSaved(true);
+          dispatch(markSaved());
         })
         .catch((err) => {
           console.error("Error saving to Algolia:", err);
@@ -73,6 +78,7 @@ function QuizResult() {
     totalQuestions,
     percentage,
     answers,
+    dispatch,
   ]);
 
   if (isLoading) {
@@ -86,11 +92,21 @@ function QuizResult() {
   return (
     <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 shadow-inner space-y-4 w-full">
       <h2 className="text-xl font-semibold text-gray-800">
-        Your score:{" "}
-        <span className="text-orange-600 font-bold">
-          {correctCount} / {totalQuestions}
-        </span>{" "}
-        ({percentage}%)
+        {correctCount === 0 ? (
+          <>
+            😅 Don't worry! Your result:{" "}
+            <span className="text-red-600 font-bold">0 / {totalQuestions}</span>{" "}
+            ({percentage}%)
+          </>
+        ) : (
+          <>
+            Your score:{" "}
+            <span className="text-orange-600 font-bold">
+              {correctCount} / {totalQuestions}
+            </span>{" "}
+            ({percentage}%)
+          </>
+        )}
       </h2>
 
       <div className="w-full bg-gray-200 rounded-full h-4">

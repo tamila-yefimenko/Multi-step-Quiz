@@ -9,6 +9,7 @@ import {
 import Loader from "../../components/Loader/Loader";
 import { useEffect } from "react";
 import { fetchSteps } from "../../redux/quiz/operations";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 function Quiz() {
   const dispatch = useDispatch();

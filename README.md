@@ -12,7 +12,8 @@ Welcome to **Quiz App** – an interactive quiz platform where you can test your
 🟠 **Step-by-step quiz** – grouped into multiple stages  
 📊 **Progress bar** – shows your journey through the quiz  
 ✅ **Multiple choice & open-ended questions**  
-📂 **Detailed results modal** – check correct & incorrect answers  
+📂 **Detailed results modal** – check correct & incorrect answers
+🥇 **Top-10 Leaderboard** – view the highest scoring users using Algolia
 🏆 **Final results** – score, percentage & motivation message  
 🔄 **Restart option** – retake the quiz any time  
 💾 **Persistent state** with Redux Persist
@@ -28,6 +29,7 @@ Welcome to **Quiz App** – an interactive quiz platform where you can test your
 - 🎨 **Tailwind CSS** – modern responsive styles
 - ✨ **Headless UI** – transitions & modals
 - 🌍 **Contentful API** – to fetch quiz questions and answer choices
+- 🔍 **Algolia**– store and fetch quiz results for leaderboard
 
 ---
 
@@ -73,6 +75,10 @@ Final score, percentage & feedback.
 
 ## 🔮 Future Plans
 
-- 🔍 Add Algolia integration for dynamic questions
 - 🌍 Expand quiz themes (Travel, Culture, Technology)
+
 - 👤 User login & history saving
+
+- 📊 More detailed analytics and ranking filters
+
+- ✨ Real-time leaderboard updates via Algolia

@@ -13,7 +13,6 @@ import {
   nextQuestion,
   previousQuestion,
 } from "../../redux/quiz/quizSlice";
-// import { fetchSteps } from "../../redux/quiz/operations";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
@@ -25,15 +24,8 @@ function QuizStep() {
   const currentQuestionIndex = useSelector(selectCurrentQuestionIndex);
   const steps = useSelector(selectSteps);
   const answers = useSelector(selectAnswers);
-  // const isLoading = useSelector(selectIsLoading);
 
   const [animate, setAnimate] = useState(false);
-
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     dispatch(fetchSteps());
-  //   }
-  // }, [dispatch, isLoading]);
 
   useEffect(() => {
     setAnimate(true);
@@ -42,7 +34,7 @@ function QuizStep() {
   }, [currentQuestionIndex, currentStep]);
 
   if (!steps.length) {
-    return null; // контент не рендеримо, loader уже на Quiz.jsx
+    return null;
   }
 
   const step = steps[currentStep];

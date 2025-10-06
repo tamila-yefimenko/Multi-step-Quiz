@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import quizReducer from "./quiz/quizSlice";
 import userReducer from "./userName/userNameSlice";
+import resultsReducer from "./results/resultsSlice";
 import {
   persistStore,
   persistReducer,
@@ -13,16 +14,23 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const persistConfig = {
-  key: "root",
+const quizPersistConfig = {
+  key: "quiz",
+  version: 1,
+  storage,
+};
+
+const userPersistConfig = {
+  key: "user",
   version: 1,
   storage,
 };
 
 export const store = configureStore({
   reducer: {
-    quiz: persistReducer(persistConfig, quizReducer),
-    user: userReducer,
+    quiz: persistReducer(quizPersistConfig, quizReducer),
+    user: persistReducer(userPersistConfig, userReducer),
+    results: resultsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -6,11 +6,14 @@ import QuizResult from "../../components/QuizResult/QuizResult";
 import Button from "../../components/Button/Button";
 import { useState } from "react";
 import ResultModal from "../../components/ResultModal/ResultModal";
+import QuizResultsEvalList from "../../components/QuizResultsEvalList/QuizResultEvalList";
+import { selectIsLoading } from "../../redux/quiz/selectors";
 
 const Result = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userName = useSelector(selectUserName);
+  const isLoading = useSelector(selectIsLoading);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -18,6 +21,14 @@ const Result = () => {
     dispatch(resetQuiz());
     navigate("/quiz");
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-8 space-y-6 min-h-[60vh] flex flex-col justify-between items-center text-center">
@@ -34,6 +45,7 @@ const Result = () => {
       </div>
 
       <QuizResult />
+      <QuizResultsEvalList />
 
       <div className="flex w-full justify-between gap-4 mt-6">
         <Button variant="secondary" onClick={() => setIsModalOpen(true)}>
