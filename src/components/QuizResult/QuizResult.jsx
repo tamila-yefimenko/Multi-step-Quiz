@@ -61,7 +61,6 @@ function QuizResult() {
           body: result,
         })
         .then(() => {
-          console.log("Saved to Algolia:", result);
           setHasSaved(true);
           dispatch(markSaved());
         })
